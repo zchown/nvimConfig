@@ -1,0 +1,5 @@
+print("Hello Zander!")
+require("opts")
+require("lzy")
+require("remap")
+require("lsp")
