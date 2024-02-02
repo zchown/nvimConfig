@@ -1,8 +1,27 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
+vim.keymap.set('i', '<C-t>', 'copilot#Accept("\\<CR>")', {
+    expr = true,
+    replace_keycodes = false
+})
 
+vim.g.copilot_no_tab_map = true
 -- go back to file tree
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
+vim.keymap.set("n", "<localleader>os", ":noautocmd MoltenEnterOutput<CR>",
+{ silent = true, desc = "show/enter output" })
+
+vim.keymap.set("n", "<localleader>mi", ":MoltenInit<CR>",
+{ silent = true, desc = "Initialize the plugin" })
+vim.keymap.set("n", "<localleader>e", ":MoltenEvaluateOperator<CR>",
+{ silent = true, desc = "run operator selection" })
+vim.keymap.set("n", "<localleader>rl", ":MoltenEvaluateLine<CR>",
+{ silent = true, desc = "evaluate line" })
+vim.keymap.set("n", "<localleader>rr", ":MoltenReevaluateCell<CR>",
+    { silent = true, desc = "re-evaluate cell" })
+vim.keymap.set("v", "<localleader>r", ":<C-u>MoltenEvaluateVisual<CR>gv",
+    { silent = true, desc = "evaluate visual selection" })
 
 -- copy to the system clipboard
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])

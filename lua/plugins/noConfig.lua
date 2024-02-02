@@ -6,3 +6,4 @@ return {
     { 'tpope/vim-fugitive', },
     { 'vim-pandoc/vim-rmarkdown', },
 }
+
