@@ -1,3 +1,3 @@
 return {
-    { "alx741/vim-hindent", },
+    { "alx741/vim-hindent", event = "VeryLazy", Lazy = true },
 }

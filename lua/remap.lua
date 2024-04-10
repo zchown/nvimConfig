@@ -11,6 +11,8 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 vim.keymap.set("n", "<localleader>os", ":noautocmd MoltenEnterOutput<CR>",
 { silent = true, desc = "show/enter output" })
+vim.keymap.set("n", "<localleader>oh", ":MoltenHideOutput<CR>",
+{ silent = true, desc = "hide output" })
 
 vim.keymap.set("n", "<localleader>mi", ":MoltenInit<CR>",
 { silent = true, desc = "Initialize the plugin" })
@@ -75,4 +77,16 @@ vim.keymap.set('n', '<leader>ps', function()
 vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
 end)
 vim.keymap.set('n', '<leader>pp', '<cmd>Telescope prosession<CR>')
+
+vim.keymap.set('v', 'aa', '<cmd> TSTextobjectSelect @parameter.outer<CR>')
+vim.keymap.set('v', 'ia', '<cmd> TSTextobjectSelect @parameter.inner<CR>')
+vim.keymap.set('v', 'af', '<cmd> TSTextobjectSelect @function.outer<CR>')
+vim.keymap.set('v', 'if', '<cmd> TSTextobjectSelect @function.inner<CR>')
+vim.keymap.set('v', 'ac', '<cmd> TSTextobjectSelect @class.outer<CR>')
+vim.keymap.set('v', 'ic', '<cmd> TSTextobjectSelect @class.inner<CR>')
+vim.keymap.set('v', 'ii', '<cmd> TSTextobjectSelect @conditional.inner<CR>')
+vim.keymap.set('v', 'ai', '<cmd> TSTextobjectSelect @conditional.outer<CR>')
+vim.keymap.set('v', 'il', '<cmd> TSTextobjectSelect @loop.inner<CR>')
+vim.keymap.set('v', 'al', '<cmd> TSTextobjectSelect @loop.outer<CR>')
+vim.keymap.set('v', 'at', '<cmd> TSTextobjectSelect @comment.outer<CR>')
 

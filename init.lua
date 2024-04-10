@@ -6,6 +6,8 @@ package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/shar
 require("lzy")
 require("lsp")
 require("remap")
+
+require'lspconfig'.glsl_analyzer.setup{}
 --
 --
 -- require'molten'.setup {}

@@ -1,6 +1,9 @@
 vim.opt.relativenumber = true
 vim.opt.number = true 
 
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 vim.opt.termguicolors = true
 

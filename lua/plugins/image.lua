@@ -1,5 +1,7 @@
 return {
     "3rd/image.nvim",
+    event = "VeryLazy",
+    lazy = true,
     config = function ()
         require("image").setup({
             backend = "kitty", -- Kitty will provide the best experience, but you need a compatible terminal
