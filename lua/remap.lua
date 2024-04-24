@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = ","
+vim.g.maplocalleader = " "
 vim.keymap.set('i', '<C-t>', 'copilot#Accept("\\<CR>")', {
     expr = true,
     replace_keycodes = false
@@ -24,6 +24,9 @@ vim.keymap.set("n", "<localleader>rr", ":MoltenReevaluateCell<CR>",
     { silent = true, desc = "re-evaluate cell" })
 vim.keymap.set("v", "<localleader>r", ":<C-u>MoltenEvaluateVisual<CR>gv",
     { silent = true, desc = "evaluate visual selection" })
+
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- copy to the system clipboard
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
