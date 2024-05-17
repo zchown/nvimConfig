@@ -45,3 +45,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 
+vim.filetype.add({
+    pattern = {
+      ['.*%.wgsl'] = 'wgsl',
+    },
+})
+
+vim.filetype.add { extension = { wgsl = "wgsl" } }
