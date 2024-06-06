@@ -15,5 +15,5 @@ return {
         vim.g.molten_output_win_style = false
         vim.g.molten_virt_text_output = false
         vim.g.molten_auto_open_output = false 
-    end,
+    end
 }

@@ -10,7 +10,8 @@ return {
    -- 'GCBallesteros/jupytext.vim',   -- "kana/vim-textobj-user",
    -- {
   "GCBallesteros/NotebookNavigator.nvim",
-  lazy = false,
+  lazy = true,
+  ft = "python",
   keys = {
     { "]h", function() 
         require("notebook-navigator").move_cell "d" 
@@ -33,6 +34,6 @@ return {
   config = function()
     local nn = require "notebook-navigator"
     nn.setup({ activate_hydra_keys = "<leader>h", repl_provider = "molten", syntax_highlight = true })
-
   end,
 }
+

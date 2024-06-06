@@ -6,8 +6,15 @@ vim.keymap.set('i', '<C-t>', 'copilot#Accept("\\<CR>")', {
 })
 
 vim.g.copilot_no_tab_map = true
--- go back to file tree
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- go back to file tree floating
+vim.api.nvim_set_keymap('n', '<leader>pv', ':lua require("oil").open_float()<CR>', { noremap = true, silent = true })
+
+vim.cmd([[
+  augroup OilFloatingWindow
+    autocmd!
+    autocmd FileType oil nnoremap <buffer> <Esc> :close<CR>
+  augroup END
+]])
 
 vim.keymap.set("n", "<localleader>os", ":noautocmd MoltenEnterOutput<CR>",
 { silent = true, desc = "show/enter output" })
