@@ -8,6 +8,12 @@ require("lsp")
 require("remap")
 
 require'lspconfig'.glsl_analyzer.setup{}
+
+if vim.g.neovide then
+    vim.g.neovide_font_size = 20
+    vim.g.neovide_scale_factor = 1.25
+end
+
 --
 --
 -- require'molten'.setup {}
