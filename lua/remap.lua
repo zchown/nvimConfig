@@ -8,6 +8,7 @@ vim.keymap.set('i', '<C-t>', 'copilot#Accept("\\<CR>")', {
 vim.g.copilot_no_tab_map = true
 -- go back to file tree floating
 vim.api.nvim_set_keymap('n', '<leader>pv', ':lua require("oil").open_float()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>fm', vim.cmd.Oil);
 
 vim.cmd([[
   augroup OilFloatingWindow
