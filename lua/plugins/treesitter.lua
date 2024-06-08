@@ -2,12 +2,6 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         config = function()
-            -- require("nvim-treesitter.parsers").get_parser_configs().wgsl = {
-            --     install_info = {
-            --         url = "https://github.com/szebniok/tree-sitter-wgsl",
-            --         files = { "src/parser.c" },
-            --     },
-            -- }
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "python", "haskell", "rust", "markdown", "latex", "java"},
                 auto_install = true,
