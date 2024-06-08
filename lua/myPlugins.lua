@@ -2,23 +2,61 @@
 -- plugin like functionality more than just simple configuration
 
 -- makes it easier to see whats happening for non vim users
--- TODO doesnt work well with splits 
+DoCursorHighlight = false
+
+local function highlightCursor()
+    vim.wo.cursorlineopt = "both"
+    vim.wo.cursorcolumn = true
+end
+
+local function unhighlightCursor()
+    vim.wo.cursorlineopt = "number"
+    vim.wo.cursorcolumn = false
+end
+
+local function updateHighlights()
+    for _, winid in ipairs(vim.api.nvim_list_wins()) do
+        if winid ~= vim.api.nvim_get_current_win() then
+            unhighlightCursor()
+        end
+    end
+end
+
 vim.api.nvim_create_user_command(
     'CursorHighlight',
     function()
-        if vim.wo.cursorlineopt == "number" then
-            vim.wo.cursorlineopt = "both"
+        DoCursorHighlight = not DoCursorHighlight
+        if DoCursorHighlight then
+            highlightCursor()
         else
-            vim.wo.cursorlineopt = "number"
+            unhighlightCursor()
         end
-
-        vim.wo.cursorcolumn = not vim.wo.cursorcolumn
     end,
     {}
 )
 
+vim.api.nvim_create_autocmd('WinEnter', {
+    group = vim.api.nvim_create_augroup('highlight-cursor', { clear = true }),
+    pattern = "*",
+    callback = function()
+        if DoCursorHighlight then
+            highlightCursor()
+        else
+            unhighlightCursor()
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd('WinLeave', {
+    group = vim.api.nvim_create_augroup('unhighlight-cursor', { clear = true }),
+    pattern = "*",
+    callback = function()
+        updateHighlights()
+    end,
+})
+
 --session management
-local function save_session()
+local function saveSession()
     local session_file = vim.loop.cwd()
     --replace / with _ to avoid issues with path
     session_file = string.gsub(session_file, "/", "_")
@@ -26,7 +64,7 @@ local function save_session()
     vim.cmd('mksession! ' .. session_file)
 end
 
-local function load_session()
+local function loadSession()
     local session_file = vim.loop.cwd()
     --replace / with _ to avoid issues with path
     session_file = string.gsub(session_file, "/", "_")
@@ -35,7 +73,7 @@ local function load_session()
         vim.cmd('source ' .. session_file)
     else
         print("could not read session creating new session")
-        save_session()
+        saveSession()
     end
 end
 
@@ -47,7 +85,7 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
     group = vim.api.nvim_create_augroup('save-session', { clear = true }),
     callback = function()
         if no_args() then
-            save_session()
+            saveSession()
         end
     end,
 })
@@ -57,7 +95,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
     group = vim.api.nvim_create_augroup('load-session', { clear = true}),
     callback = function()
         if no_args() then 
-            load_session()
+            loadSession()
             print("loaded session")
         end
     end,
