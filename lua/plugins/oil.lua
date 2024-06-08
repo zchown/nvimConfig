@@ -62,5 +62,14 @@ return {
             border = "rounded",
         },
     })
-  end,
+    -- allows esc to dismiss oil floating window
+    vim.cmd([[
+    augroup OilFloatingWindow
+    autocmd!
+    autocmd FileType oil nnoremap <buffer> <Esc> :close<CR>
+    augroup END
+    ]])
+
+
+end,
 }

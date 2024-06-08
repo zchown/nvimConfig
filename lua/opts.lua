@@ -39,39 +39,16 @@ vim.g.mapleader = " "
 vim.opt.cursorlineopt = "number"
 vim.opt.cursorline = true
 
--- makes it easier to see whats happening for non vim users
-vim.api.nvim_create_user_command(
-    'CursorHighlight',
-    function()
-        if vim.wo.cursorlineopt == "number" then
-            vim.wo.cursorlineopt = "both"
-        else
-            vim.wo.cursorlineopt = "number"
-        end
-
-        vim.wo.cursorcolumn = not vim.wo.cursorcolumn
-    end,
-    {}
-)
-
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
-
-
 vim.filetype.add({
     pattern = {
       ['.*%.wgsl'] = 'wgsl',
     },
 })
-
 vim.filetype.add { extension = { wgsl = "wgsl" } }
 
 if vim.g.neovide then
     vim.g.neovide_font_size = 20
     vim.g.neovide_scale_factor = 1.25
 end
+
+

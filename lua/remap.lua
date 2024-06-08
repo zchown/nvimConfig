@@ -1,5 +1,3 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 vim.keymap.set('i', '<C-t>', 'copilot#Accept("\\<CR>")', {
     expr = true,
     replace_keycodes = false
@@ -8,15 +6,8 @@ vim.keymap.set('i', '<C-t>', 'copilot#Accept("\\<CR>")', {
 vim.g.copilot_no_tab_map = true
 -- go back to file tree floating
 vim.api.nvim_set_keymap('n', '<leader>pv', ':lua require("oil").open_float()<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>fm', vim.cmd.Oil);
 
--- allows esc to dismiss oil floating window
-vim.cmd([[
-  augroup OilFloatingWindow
-    autocmd!
-    autocmd FileType oil nnoremap <buffer> <Esc> :close<CR>
-  augroup END
-]])
+vim.keymap.set('n', '<leader>fm', vim.cmd.Oil);
 
 vim.keymap.set("n", "<localleader>os", ":noautocmd MoltenEnterOutput<CR>",
 { silent = true, desc = "show/enter output" })
