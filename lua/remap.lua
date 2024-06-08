@@ -10,6 +10,7 @@ vim.g.copilot_no_tab_map = true
 vim.api.nvim_set_keymap('n', '<leader>pv', ':lua require("oil").open_float()<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>fm', vim.cmd.Oil);
 
+-- allows esc to dismiss oil floating window
 vim.cmd([[
   augroup OilFloatingWindow
     autocmd!
