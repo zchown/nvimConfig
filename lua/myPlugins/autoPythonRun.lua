@@ -1,4 +1,3 @@
--- Define the function to get the file extension
 local function getExtension(filename)
     return filename:match("^.+(%..+)$")
 end
@@ -8,7 +7,8 @@ vim.api.nvim_create_user_command(
 function(args)
     local curfile
 
-    if  args.args then
+
+    if  args.args and not args.args == "" then
         curfile = args.args
         if getExtension(curfile) ~= ".py" then
             print("Not a python file attempting to correct")
