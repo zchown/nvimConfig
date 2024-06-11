@@ -1,5 +1,5 @@
 vim.opt.relativenumber = true
-vim.opt.number = true 
+vim.opt.number = true
 
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
@@ -16,6 +16,20 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
+
+local enter_group = vim.api.nvim_create_augroup('HaskellEnter', { clear = true })
+vim.api.nvim_create_autocmd('BufEnter', {
+    group = enter_group,
+    callback = function()
+        if vim.bo.filetype == 'haskell' then
+            vim.bo.tabstop = 2
+            vim.bo.shiftwidth = 2
+            vim.bo.softtabstop = 2
+            print("changed")
+        end
+    end,
+})
+
 
 vim.wrap = true
 vim.smartindent = true

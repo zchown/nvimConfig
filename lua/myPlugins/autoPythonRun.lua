@@ -20,7 +20,6 @@ function(args)
             print("Not a python file")
             return
         end
-
     end
 
     if not vim.loop.fs_stat(curfile) then

@@ -4,26 +4,36 @@ vim.keymap.set('i', '<C-t>', 'copilot#Accept("\\<CR>")', {
 })
 
 vim.g.copilot_no_tab_map = true
+
 -- go back to file tree floating
 vim.api.nvim_set_keymap('n', '<leader>pv', ':lua require("oil").open_float()<CR>', { noremap = true, silent = true })
 
 vim.keymap.set('n', '<leader>fm', vim.cmd.Oil);
 
-vim.keymap.set("n", "<localleader>os", ":noautocmd MoltenEnterOutput<CR>",
-{ silent = true, desc = "show/enter output" })
-vim.keymap.set("n", "<localleader>oh", ":MoltenHideOutput<CR>",
-{ silent = true, desc = "hide output" })
+-- python notebook remaps
+local group = vim.api.nvim_create_augroup("FileTypePythonJupyter", { clear = true })
 
-vim.keymap.set("n", "<localleader>mi", ":MoltenInit<CR>",
-{ silent = true, desc = "Initialize the plugin" })
-vim.keymap.set("n", "<localleader>e", ":MoltenEvaluateOperator<CR>",
-{ silent = true, desc = "run operator selection" })
-vim.keymap.set("n", "<localleader>rl", ":MoltenEvaluateLine<CR>",
-{ silent = true, desc = "evaluate line" })
-vim.keymap.set("n", "<localleader>rr", ":MoltenReevaluateCell<CR>",
-    { silent = true, desc = "re-evaluate cell" })
-vim.keymap.set("v", "<localleader>r", ":<C-u>MoltenEvaluateVisual<CR>gv",
-    { silent = true, desc = "evaluate visual selection" })
+vim.api.nvim_create_autocmd("FileType", {
+    group = group,
+    pattern = {'python', 'ipynb'},
+    callback = function()
+        vim.api.nvim_buf_set_keymap(0, "n", "<localleader>os", ":noautocmd MoltenEnterOutput<CR>",
+        { silent = true, desc = "show/enter output" })
+        vim.api.nvim_buf_set_keymap(0, "n", "<localleader>oh", ":MoltenHideOutput<CR>",
+        { silent = true, desc = "hide output" })
+
+        vim.api.nvim_buf_set_keymap(0, "n", "<localleader>mi", ":MoltenInit<CR>",
+        { silent = true, desc = "Initialize the plugin" })
+        vim.api.nvim_buf_set_keymap(0, "n", "<localleader>e", ":MoltenEvaluateOperator<CR>",
+        { silent = true, desc = "run operator selection" })
+        vim.api.nvim_buf_set_keymap(0, "n", "<localleader>rl", ":MoltenEvaluateLine<CR>",
+        { silent = true, desc = "evaluate line" })
+        vim.api.nvim_buf_set_keymap(0, "n", "<localleader>rr", ":MoltenReevaluateCell<CR>",
+        { silent = true, desc = "re-evaluate cell" })
+        vim.api.nvim_buf_set_keymap(0, "v", "<localleader>r", ":<C-u>MoltenEvaluateVisual<CR>gv",
+        { silent = true, desc = "evaluate visual selection" })
+    end,
+})
 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -48,8 +58,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- keep search terms in center
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "N", "Nzz")
+vim.keymap.set("n", "n", "nzz")
 
 -- paste without losing the paste
 vim.keymap.set("x", "<leader>p", [["_dP]])
@@ -72,11 +82,10 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 vim.keymap.set('n', '<leader>pb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>ps', function() 
-	builtin.grep_string({ search = vim.fn.input("Grep > ") } );
-vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>ps', function()
+    builtin.grep_string({ search = vim.fn.input("Grep > ") } );
+vim.keymap.set('n', '<leader>ph', builtin.help_tags, {})
 end)
-vim.keymap.set('n', '<leader>pp', '<cmd>Telescope prosession<CR>')
 
 vim.keymap.set('v', 'aa', '<cmd> TSTextobjectSelect @parameter.outer<CR>')
 vim.keymap.set('v', 'ia', '<cmd> TSTextobjectSelect @parameter.inner<CR>')
