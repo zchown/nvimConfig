@@ -8,7 +8,7 @@ function(args)
     local curfile
 
 
-    if  args.args and not args.args == "" then
+    if  args.args ~= nil and not (args.args == "") then
         curfile = args.args
         if getExtension(curfile) ~= ".py" then
             print("Not a python file attempting to correct")
