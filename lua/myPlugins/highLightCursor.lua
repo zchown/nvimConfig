@@ -22,6 +22,7 @@ vim.api.nvim_create_user_command(
     'CursorHighlight',
     function()
         vim.g.DoCursorHighlight = not vim.g.DoCursorHighlight
+        print(vim.g.DoCursorHighlight)
         if vim.g.DoCursorHighlight then
             highlightCursor()
         else
@@ -50,3 +51,37 @@ vim.api.nvim_create_autocmd('WinLeave', {
         updateHighlights()
     end,
 })
+
+-- local ncolor = vim.api.nvim_create_augroup('ncolor', { clear = true })
+--
+-- vim.api.nvim_create_autocmd("ModeChanged", {
+--     group = ncolor,
+--     pattern = "*:i",
+--     callback = function()
+--         vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#a6e3a1', bold = true })
+--     end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("ModeChanged", {
+--     group = ncolor,
+--     pattern = "*:n",
+--     callback = function()
+--         vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#89b4fa', bold = true })
+--     end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("ModeChanged", {
+--     group = ncolor,
+--     pattern = "*:v",
+--     callback = function()
+--         vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#b4befe', bold = true })
+--     end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("ModeChanged", {
+--     group = ncolor,
+--     pattern = "*:c",
+--     callback = function()
+--         vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#f9e2af', bold = true })
+--     end,
+-- })

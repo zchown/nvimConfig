@@ -30,7 +30,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
     end,
 })
 
-
 vim.wrap = true
 vim.smartindent = true
 
