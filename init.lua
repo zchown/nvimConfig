@@ -16,3 +16,5 @@ require("myPlugins")
 
 require'lspconfig'.glsl_analyzer.setup{}
 
+
+-- idea allow lsp suggestions to be moved to telescope after a keybind

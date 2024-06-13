@@ -5,16 +5,27 @@ vim.keymap.set('i', '<C-t>', 'copilot#Accept("\\<CR>")', {
 
 vim.g.copilot_no_tab_map = true
 
+local luaGroup = vim.api.nvim_create_augroup("FileTypeLua", { clear = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = luaGroup,
+    pattern = {'lua'},
+    callback = function()
+        vim.api.nvim_buf_set_keymap(0, "n", "<localleader><leader>", ":luafile %<CR>",
+        { silent = true, desc = "run lua file" })
+    end,
+})
+
 -- go back to file tree floating
 vim.api.nvim_set_keymap('n', '<leader>pv', ':lua require("oil").open_float()<CR>', { noremap = true, silent = true })
 
 vim.keymap.set('n', '<leader>fm', vim.cmd.Oil);
 
 -- python notebook remaps
-local group = vim.api.nvim_create_augroup("FileTypePythonJupyter", { clear = true })
+local pythonGroup = vim.api.nvim_create_augroup("FileTypePythonJupyter", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
-    group = group,
+    group = pythonGroup,
     pattern = {'python', 'ipynb'},
     callback = function()
         vim.api.nvim_buf_set_keymap(0, "n", "<localleader>os", ":noautocmd MoltenEnterOutput<CR>",
