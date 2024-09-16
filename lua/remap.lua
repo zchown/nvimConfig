@@ -28,11 +28,12 @@ vim.api.nvim_create_autocmd("FileType", {
     group = pythonGroup,
     pattern = {'python', 'ipynb'},
     callback = function()
+        vim.api.nvim_buf_set_keymap(0, "n", "<leader><leader>", ":RunPython<CR>",
+        { silent = true, desc = "run python file" })
         vim.api.nvim_buf_set_keymap(0, "n", "<localleader>os", ":noautocmd MoltenEnterOutput<CR>",
         { silent = true, desc = "show/enter output" })
         vim.api.nvim_buf_set_keymap(0, "n", "<localleader>oh", ":MoltenHideOutput<CR>",
         { silent = true, desc = "hide output" })
-
         vim.api.nvim_buf_set_keymap(0, "n", "<localleader>mi", ":MoltenInit<CR>",
         { silent = true, desc = "Initialize the plugin" })
         vim.api.nvim_buf_set_keymap(0, "n", "<localleader>e", ":MoltenEvaluateOperator<CR>",
@@ -109,4 +110,3 @@ vim.keymap.set('v', 'ai', '<cmd> TSTextobjectSelect @conditional.outer<CR>')
 vim.keymap.set('v', 'il', '<cmd> TSTextobjectSelect @loop.inner<CR>')
 vim.keymap.set('v', 'al', '<cmd> TSTextobjectSelect @loop.outer<CR>')
 vim.keymap.set('v', 'at', '<cmd> TSTextobjectSelect @comment.outer<CR>')
-
