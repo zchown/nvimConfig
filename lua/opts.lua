@@ -65,10 +65,10 @@ if vim.g.neovide then
 end
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+    group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })
 
 
@@ -77,7 +77,15 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     group = vim.api.nvim_create_augroup('disable-haskell-format', { clear = true }),
     pattern = "*.hs",
     callback = function()
-        vim.bo.formatoptions = vim.bo.formatoptions:gsub("a", "")
+        local current_autoformat = vim.g.autoformat
+        vim.b.autoformat = false
+        vim.api.nvim_create_autocmd('BufWritePost', {
+            buffer = 0,
+            once = true,
+            callback = function()
+                vim.b.autoformat = current_autoformat
+            end
+        })
     end,
 })
 

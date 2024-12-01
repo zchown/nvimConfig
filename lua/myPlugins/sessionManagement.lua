@@ -48,7 +48,7 @@ local function loadSession()
     --replace / with _ to avoid issues with path
     session_file = vim.g.continuityCurrentDir
     session_file = vim.g.continuitySessionDir .. session_file
-    if vim.fn.filereadable(session_file) == 1 then
+    if vim.fn.filereadable(session_file) <= 1 then
         vim.cmd('source ' .. session_file)
     else
         print("could not read session creating new session")
@@ -60,7 +60,7 @@ local function loadOptions()
     local option_file = vim.loop.cwd()
     option_file = vim.g.continuityCurrentDir
     option_file = vim.g.continuitySessionDir .. option_file .. "_options.lua"
-    if vim.fn.filereadable(option_file) == 1 then
+    if vim.fn.filereadable(option_file) <= 1 then
         vim.cmd('source ' .. option_file)
     else
         print("Failed to read options file")

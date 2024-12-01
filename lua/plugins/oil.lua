@@ -61,6 +61,7 @@ return {
         ssh = {
             border = "rounded",
         },
+        extra_scp_args = { '-O' },
     })
     -- allows esc to dismiss oil floating window
     vim.cmd([[
