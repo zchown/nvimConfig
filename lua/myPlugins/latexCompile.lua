@@ -56,8 +56,10 @@ function(args)
     local noext = curfile:match("(.+)%..+")
     if getExtension(curfile) == ".md" then
         vim.fn.termopen("pandoc " .. curfile .. " -o " .. noext .. ".pdf")
+        vim.cmd("normal! G")
     else
         vim.fn.termopen("pdflatex " .. curfile)
+        vim.cmd("normal! G")
     end
 
     vim.api.nvim_buf_set_keymap(buf, 'n', '<Esc>', '<Cmd>bd!<CR>', { noremap = true, silent = true })
