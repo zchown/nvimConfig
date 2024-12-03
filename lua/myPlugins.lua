@@ -11,3 +11,4 @@ require("myPlugins/sessionManagement")
 -- auto run python files
 require("myPlugins/autoPythonRun")
 
+require("myPlugins/latexCompile")

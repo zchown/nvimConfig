@@ -59,6 +59,20 @@ vim.filetype.add({
 })
 vim.filetype.add { extension = { wgsl = "wgsl" } }
 
+vim.filetype.add({
+    pattern = {
+      ['.*%.tex'] = 'latex',
+    },
+})
+vim.filetype.add { extension = { tex = "latex" } }
+
+vim.filetype.add({
+    pattern = {
+      ['.*%.md'] = 'markdown',
+    },
+})
+vim.filetype.add { extension = { md = "markdown" } }
+
 if vim.g.neovide then
     vim.g.neovide_font_size = 20
     vim.g.neovide_scale_factor = 1.25

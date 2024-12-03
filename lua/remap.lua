@@ -47,6 +47,16 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+local latexGroup = vim.api.nvim_create_augroup("FileTypeLatex", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = latexGroup,
+    pattern = {'latex', 'markdown'},
+    callback = function()
+        vim.api.nvim_buf_set_keymap(0, "n", "<leader><leader>", ":RunLatex<CR>",
+        { silent = true, desc = "run latex file" })
+    end,
+})
+
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
