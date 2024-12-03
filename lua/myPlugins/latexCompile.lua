@@ -6,8 +6,6 @@ vim.api.nvim_create_user_command(
 "RunLatex",
 function(args)
     local curfile
-
-
     if  args.args ~= nil and not (args.args == "") then
         curfile = args.args
         if getExtension(curfile) ~= ".tex" and getExtension(curfile) ~= ".md" then
@@ -54,7 +52,6 @@ function(args)
         style = 'minimal',
         border = border_chars
     })
-    
     -- current file without extension
     local noext = curfile:match("(.+)%..+")
     if getExtension(curfile) == ".md" then

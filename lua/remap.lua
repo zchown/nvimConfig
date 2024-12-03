@@ -50,10 +50,13 @@ vim.api.nvim_create_autocmd("FileType", {
 local latexGroup = vim.api.nvim_create_augroup("FileTypeLatex", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
     group = latexGroup,
-    pattern = {'latex', 'markdown'},
+    pattern = {'tex', "markdown"},
     callback = function()
-        vim.api.nvim_buf_set_keymap(0, "n", "<leader><leader>", ":RunLatex<CR>",
-        { silent = true, desc = "run latex file" })
+        vim.keymap.set("n", "<leader><leader>", ":RunLatex<CR>", {
+            buffer = true,
+            silent = true,
+            desc = "run latex file"
+        })
     end,
 })
 
