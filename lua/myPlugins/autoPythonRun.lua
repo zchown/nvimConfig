@@ -6,8 +6,6 @@ vim.api.nvim_create_user_command(
 "RunPython",
 function(args)
     local curfile
-
-
     if  args.args ~= nil and not (args.args == "") then
         curfile = args.args
         if getExtension(curfile) ~= ".py" then

@@ -123,3 +123,6 @@ vim.keymap.set('v', 'ai', '<cmd> TSTextobjectSelect @conditional.outer<CR>')
 vim.keymap.set('v', 'il', '<cmd> TSTextobjectSelect @loop.inner<CR>')
 vim.keymap.set('v', 'al', '<cmd> TSTextobjectSelect @loop.outer<CR>')
 vim.keymap.set('v', 'at', '<cmd> TSTextobjectSelect @comment.outer<CR>')
+
+-- bind <leader>~ to toggle false to true and vice versa respecting capitalization
+

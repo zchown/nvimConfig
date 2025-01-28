@@ -3,18 +3,17 @@ return {
     config = function()
         require("night-owl").setup()
         vim.cmd.colorscheme("night-owl")
-        -- set background to dark_blue
         vim.cmd("hi Normal guibg=#010d18")
 
-      end,
-    -- {
-    --     "catppuccin/nvim",
-    --     config = function()
-    --         vim.cmd.colorscheme("catppuccin")
-    --         vim.api.nvim_set_hl(0, "CursorColumn", { bg = "#600088" })
-    --         vim.api.nvim_set_hl(0, "CursorLine", { bg = "#600088" })
-    --
-    --     end,
-    -- },
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = "haskell",
+            callback = function()
+                vim.api.nvim_set_hl(0, "@string", { fg = "#2D9440" })
+                vim.api.nvim_set_hl(0, "@string.special", { fg = "#2D9440" })
+                vim.api.nvim_set_hl(0, "@string.quoted", { fg = "#2D9440" })
+                vim.api.nvim_set_hl(0, "@string.delimiter", { fg = "#2D9440" })
+                vim.api.nvim_set_hl(0, "@string.escape", { fg = "#2D9440" })
+            end,
+        })
+    end,
 }
-

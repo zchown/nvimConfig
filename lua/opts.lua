@@ -72,19 +72,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- disable auto format on save for haskell files
-vim.api.nvim_create_autocmd('BufWritePre', {
-    group = vim.api.nvim_create_augroup('disable-haskell-format', { clear = true }),
-    pattern = "*.hs",
-    callback = function()
-        local current_autoformat = vim.g.autoformat
-        vim.b.autoformat = false
-        vim.api.nvim_create_autocmd('BufWritePost', {
-            buffer = 0,
-            once = true,
-            callback = function()
-                vim.b.autoformat = current_autoformat
-            end
-        })
-    end,
-})
-
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--     group = vim.api.nvim_create_augroup('disable-haskell-format', { clear = true }),
+--     pattern = "*.hs",
+--     callback = function()
+--         local current_autoformat = vim.g.autoformat
+--         vim.b.autoformat = false
+--         vim.api.nvim_create_autocmd('BufWritePost', {
+--             buffer = 0,
+--             once = true,
+--             callback = function()
+--                 vim.b.autoformat = current_autoformat
+--             end
+--         })
+--     end,
+-- })
+--
