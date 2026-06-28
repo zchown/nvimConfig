@@ -14,7 +14,5 @@ require("lsp")
 require("remap")
 require("myPlugins")
 
-require'lspconfig'.glsl_analyzer.setup{}
+vim.g.python3_host_prog = "~/.local/nvim-python/bin/python3"
 
-
--- idea allow lsp suggestions to be moved to telescope after a keybind

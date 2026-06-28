@@ -53,7 +53,7 @@ function(args)
         border = border_chars
     })
 
-    vim.fn.termopen("python " .. curfile)
+    vim.fn.termopen("python3 " .. curfile)
 
     vim.api.nvim_buf_set_keymap(buf, 'n', '<Esc>', '<Cmd>bd!<CR>', { noremap = true, silent = true })
 end,

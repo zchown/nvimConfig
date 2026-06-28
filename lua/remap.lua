@@ -5,6 +5,18 @@ vim.keymap.set('i', '<C-t>', 'copilot#Accept("\\<CR>")', {
 
 vim.g.copilot_no_tab_map = true
 
+function toggle_copilot()
+    if vim.g.copilot_enabled == true then
+        vim.g.copilot_enabled = false
+        print("Copilot Disabled")
+    else
+        vim.g.copilot_enabled = true
+        print("Copilot Enabled")
+    end
+end
+
+vim.keymap.set('n', '<leader>ct', toggle_copilot, { desc = 'Toggle [C]opilot [T]rue/False' })
+
 local luaGroup = vim.api.nvim_create_augroup("FileTypeLua", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -23,29 +35,6 @@ vim.keymap.set('n', '<leader>fm', vim.cmd.Oil);
 
 -- python notebook remaps
 local pythonGroup = vim.api.nvim_create_augroup("FileTypePythonJupyter", { clear = true })
-
-vim.api.nvim_create_autocmd("FileType", {
-    group = pythonGroup,
-    pattern = {'python', 'ipynb'},
-    callback = function()
-        vim.api.nvim_buf_set_keymap(0, "n", "<leader><leader>", ":RunPython<CR>",
-        { silent = true, desc = "run python file" })
-        vim.api.nvim_buf_set_keymap(0, "n", "<localleader>os", ":noautocmd MoltenEnterOutput<CR>",
-        { silent = true, desc = "show/enter output" })
-        vim.api.nvim_buf_set_keymap(0, "n", "<localleader>oh", ":MoltenHideOutput<CR>",
-        { silent = true, desc = "hide output" })
-        vim.api.nvim_buf_set_keymap(0, "n", "<localleader>mi", ":MoltenInit<CR>",
-        { silent = true, desc = "Initialize the plugin" })
-        vim.api.nvim_buf_set_keymap(0, "n", "<localleader>e", ":MoltenEvaluateOperator<CR>",
-        { silent = true, desc = "run operator selection" })
-        vim.api.nvim_buf_set_keymap(0, "n", "<localleader>rl", ":MoltenEvaluateLine<CR>",
-        { silent = true, desc = "evaluate line" })
-        vim.api.nvim_buf_set_keymap(0, "n", "<localleader>rr", ":MoltenReevaluateCell<CR>",
-        { silent = true, desc = "re-evaluate cell" })
-        vim.api.nvim_buf_set_keymap(0, "v", "<localleader>r", ":<C-u>MoltenEvaluateVisual<CR>gv",
-        { silent = true, desc = "evaluate visual selection" })
-    end,
-})
 
 local latexGroup = vim.api.nvim_create_augroup("FileTypeLatex", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
@@ -93,8 +82,8 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set("n", "<leader>no", vim.cmd.nohl)
 
 -- quick fix stuff
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz")
 
 -- toggle undo tree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
@@ -124,5 +113,42 @@ vim.keymap.set('v', 'il', '<cmd> TSTextobjectSelect @loop.inner<CR>')
 vim.keymap.set('v', 'al', '<cmd> TSTextobjectSelect @loop.outer<CR>')
 vim.keymap.set('v', 'at', '<cmd> TSTextobjectSelect @comment.outer<CR>')
 
--- bind <leader>~ to toggle false to true and vice versa respecting capitalization
+-- useful for zig
+vim.keymap.set('v', 'i|', '<cmd> normal _f|lvt|<CR>')
+vim.keymap.set('v', 'a|', '<cmd> normal _f|vt|<CR>')
+vim.keymap.set('n', 'ci|', '<cmd> normal _f|lct|<CR>')
+vim.keymap.set('n', 'di|', '<cmd> normal _f|ldt|<CR>')
 
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
+
+-- Essential keybinds
+vim.keymap.set("n", "<localleader>e", ":MoltenEvaluateOperator<CR>", { desc = "evaluate operator", silent = true })
+vim.keymap.set("n", "<localleader>os", ":noautocmd MoltenEnterOutput<CR>", { desc = "open output window", silent = true })
+
+-- Recommended additional keybinds
+vim.keymap.set("n", "<localleader>rr", ":MoltenReevaluateCell<CR>", { desc = "re-eval cell", silent = true })
+vim.keymap.set("v", "<localleader>r", ":<C-u>MoltenEvaluateVisual<CR>gv", { desc = "execute visual selection", silent = true })
+vim.keymap.set("n", "<localleader>oh", ":MoltenHideOutput<CR>", { desc = "close output window", silent = true })
+vim.keymap.set("n", "<localleader>md", ":MoltenDelete<CR>", { desc = "delete Molten cell", silent = true })
+
+-- Quarto runner keybinds
+local runner = require("quarto.runner")
+vim.keymap.set("n", "<localleader>rc", runner.run_cell, { desc = "run cell", silent = true })
+vim.keymap.set("n", "<localleader>ra", runner.run_above, { desc = "run cell and above", silent = true })
+vim.keymap.set("n", "<localleader>rA", runner.run_all, { desc = "run all cells", silent = true })
+vim.keymap.set("n", "<localleader>rl", runner.run_line, { desc = "run line", silent = true })
+vim.keymap.set("v", "<localleader>r", runner.run_range, { desc = "run visual range", silent = true })
+
+vim.keymap.set("n", "<localleader>nc", function()
+    local line = vim.api.nvim_win_get_cursor(0)[1]
+    vim.api.nvim_buf_set_lines(0, line, line, false, {
+        "",
+        "```python",
+        "",
+        "```",
+        ""
+    })
+    vim.api.nvim_win_set_cursor(0, {line + 3, 0})
+    vim.cmd("startinsert")
+end, { desc = "new code cell" })

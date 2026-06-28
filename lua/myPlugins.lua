@@ -12,3 +12,5 @@ require("myPlugins/sessionManagement")
 require("myPlugins/autoPythonRun")
 
 require("myPlugins/latexCompile")
+
+-- require("myPlugins/pythonNotebook").setup()

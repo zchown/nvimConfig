@@ -5,5 +5,6 @@ return {
     { event = "VeryLazy", lazy = true, "mbbill/undotree", },
     { event = "VeryLazy", lazy = true, 'tpope/vim-fugitive', },
     { event = "VeryLazy", lazy = true, 'vim-pandoc/vim-rmarkdown', },
+	{ "whonore/Coqtail", },
 }
 
