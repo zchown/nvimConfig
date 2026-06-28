@@ -5,12 +5,7 @@
 -- doesn't persist across sessions :(
 require("myPlugins/highlightCursor")
 
---session management
-require("myPlugins/sessionManagement")
-
 -- auto run python files
 require("myPlugins/autoPythonRun")
 
 require("myPlugins/latexCompile")
-
--- require("myPlugins/pythonNotebook").setup()
