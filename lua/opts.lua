@@ -130,3 +130,4 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 vim.keymap.set("n", "<localleader>ic", function()
     require("image").clear()
 end, { desc = "clear images", silent = true })
+
